@@ -1,0 +1,91 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <div class="form-group row">
+              <div class="col-md-6">
+                <h3 class="card-title ">Earrings</h3>
+                <p class="card-category">All earrings</p>
+              </div>
+              <div class="col-md-6">
+                <div class="row btn-group-lg btn-group-raised btn-toolbar btn-group-justified pull-right">
+                  <div class="col-md-6">
+                    <button mat-raised-button
+                            color="accent"
+                            (click)="loadAll()"
+                            [disabled]="isLoading">
+                      <mat-icon>refresh</mat-icon>
+                      <span> Refresh List</span>
+                    </button>
+                  </div>
+                  <div *appHasAnyAuthority="'ROLE_ADMIN'" class="col-sm-6">
+                    <button mat-raised-button
+                            color="primary"
+                            routerLink="/addEarring">
+                      <mat-icon>edit</mat-icon>
+                      <span> Create Earring</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th *appHasAnyAuthority="'ROLE_ADMIN'" scope="col">Price</th>
+                <th *appHasAnyAuthority="'ROLE_ADMIN'" scope="col">Premium</th>
+                <th *appHasAnyAuthority="'ROLE_ADMIN'" scope="col">Delivery</th>
+                <th scope="col">Total price</th>
+                <th *appHasAnyAuthority="'ROLE_ADMIN'" scope="col"></th>
+                </thead>
+                <tbody *ngIf="earrings">
+                <tr *ngFor="let earring of earrings; index as i">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>
+                    <img src="{{earring.imageUrl}}" class="img-fluid img-thumbnail h-auto" width="150"
+                         (click)="utilities.zoomImg(earring.imageUrl)">
+                  </td>
+                  <td>
+                    <a class="nav-link" [routerLink]="'/dashboard/earrings/'+ earring.id">
+                      {{earring.name}}
+                    </a>
+                  </td>
+                  <td>{{earring.description}}</td>
+                  <td *appHasAnyAuthority="'ROLE_ADMIN'">{{earring.priceDetails|currency :'EUR'}}</td>
+                  <td *appHasAnyAuthority="'ROLE_ADMIN'">{{earring.premium|currency :'EUR'}}</td>
+                  <td *appHasAnyAuthority="'ROLE_ADMIN'">{{earring.deliveryPrice|currency :'EUR'}}</td>
+                  <td>{{earring.totalPrice |currency :'EUR'}}</td>
+                  <td *appHasAnyAuthority="'ROLE_ADMIN'" class="td-actions text-right">
+                    <!-- Call to action buttons -->
+                    <button mat-icon-button
+                            color="primary"
+                            matTooltip="Edit"
+                            routerLink="/updateEarring/{{earring.id}}">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button
+                            color="warn"
+                            matTooltip="Delete"
+                            (click)="delete(earring)">
+                      <mat-icon>delete_forever</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

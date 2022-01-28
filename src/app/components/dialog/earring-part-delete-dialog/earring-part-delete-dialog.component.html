@@ -1,0 +1,22 @@
+<div *ngIf="earringPart">
+  <!--<form name="deleteForm" (ngSubmit)="earring-part-delete-dialog(earringPar.id!)">-->
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm delete operation</h4>
+    <button mat-icon-button (click)="cancel()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete these Records?</p>
+    <p class="text-warning"><small>This action cannot be undone.</small></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    <button *ngIf="earringPart.id" type="button" class="btn btn-danger" (click)="delete(earringPart.id)">
+      <span> Delete</span>
+    </button>
+  </div>
+</div>
+
+

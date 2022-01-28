@@ -1,0 +1,104 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <div class="form-group row">
+              <div class="col-md-4">
+                <h3 class="card-title ">Earring Components</h3>
+                <p class="card-category">All components for earrings</p>
+              </div>
+              <div class="col-md-8">
+                <div class="btn-toolbar pull-right">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <button mat-raised-button
+                              color="primary"
+                              class="btn-md btn-block btn-group-sm"
+                              [disabled]="!hasTempEarringPart()"
+                              routerLink="/addEarring">
+                        <mat-icon>create</mat-icon>
+                        <span> Create Earring</span>
+                      </button>
+                    </div>
+                    <div class="col-lg-4">
+                      <button mat-raised-button
+                              color="accent"
+                              class="btn-md btn-block btn-group-sm"
+                              (click)="loadAll()"
+                              [disabled]="isLoading">
+                        <mat-icon>refresh</mat-icon>
+                        <span> Refresh List</span>
+                      </button>
+                    </div>
+                    <div class="col-lg-4">
+                      <button mat-raised-button
+                              color="primary"
+                              class="btn-md btn-block btn-group-sm"
+                              routerLink="/addEarringPart">
+                        <mat-icon>edit</mat-icon>
+                        <span> Create Detail</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Material</th>
+                <th scope="col">Color</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+                </thead>
+                <tbody *ngIf="earringParts">
+                  <tr *ngFor="let earringPart of earringParts; index as i">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>
+                      <img src="{{earringPart.imageUrl}}" class="img-fluid img-thumbnail h-auto" width="150" (click)="utilities.zoomImg(earringPart.imageUrl)">
+                    </td>
+                    <td>{{earringPart.name}}</td>
+                    <td>{{earringPart.description}}</td>
+                    <td>{{earringPart.material}}</td>
+                    <td>{{earringPart.color}}</td>
+                    <td>{{earringPart.price |currency :'EUR'}}</td>
+                    <td class="td-actions text-right">
+                      <!-- Call to action buttons -->
+                      <button mat-icon-button
+                              color="accent"
+                              matTooltip="Add"
+                              (click)="addTempEarringPart(earringPart)">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                      <button mat-icon-button
+                              color="primary"
+                              matTooltip="Edit"
+                              routerLink="/updateEarringPart/{{earringPart.id}}">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-icon-button
+                              color="warn"
+                              matTooltip="Delete"
+                              (click)="delete(earringPart)">
+                        <mat-icon>delete_forever</mat-icon>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

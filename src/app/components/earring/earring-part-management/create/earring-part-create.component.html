@@ -1,0 +1,95 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h3 class="card-title text-center" id="myEarringPartLabel">Create Earring Detail</h3>
+          </div>
+          <div class="modal"  *ngIf="isLoadingCrystal">
+            <mat-spinner></mat-spinner>
+          </div>
+          <div class="card-body">
+            <form  name="editForm" [formGroup]="editForm" role="form">
+              <div *ngIf="earringPart">
+                <div class="form-group" [hidden]="!earringPart.id">
+                  <label>ID</label>
+                  <input type="text" class="form-control" name="id" formControlName="id" readonly/>
+                </div>
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" name="name" formControlName="name" required/>
+                  <mat-error *ngIf="editForm.get('name')?.errors">Name is required</mat-error>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" name="description" formControlName="description"/>
+                </div>
+                <div class="form-group">
+                  <label>Identifier</label>
+                  <div class="row">
+                    <div class="col-md-11">
+                      <input type="text" class="form-control" name="identifier" formControlName="identifier"/>
+                    </div>
+                    <div class="col-md-1">
+                      <button mat-icon-button
+                              color="primary"
+                              matTooltip="Search"
+                              (click)="searchCrystal()"
+                              [disabled]="!editForm.get(['identifier'])!.value"
+                      >
+                        <mat-icon>search</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Material</label>
+                  <input type="text" class="form-control" name="material" formControlName="material"/>
+                </div>
+                <div class="form-group">
+                  <label>Image</label>
+
+                  <app-upload-form (fileUploadUrl)="getImageUrl($event)"></app-upload-form>
+
+                  <input type="text" class="form-control" name="imageUrl" formControlName="imageUrl" hidden readonly>
+                  <div *ngIf="earringPart.imageUrl" class="text-center mt-2">
+                    <img mat-card-image [src]="earringPart.imageUrl" class="rounded w-25">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Color</label>
+                  <input type="text" class="form-control" name="color" formControlName="color"/>
+                </div>
+
+                <div class="form-group">
+                  <label>Price</label>
+                  <input  type="text" class="form-control" name="price" formControlName="price"/>
+                  <mat-error *ngIf="editForm.get('price')?.errors">Only numbers and '.'</mat-error>
+                </div>
+
+              </div>
+
+              <div *ngIf="earringPart">
+
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                        [disabled]="editForm.invalid || isSaving" (click)="save()">
+                  <span>Save</span>
+                </button>
+                <button mat-raised-button class="btn pull-right mr-2" (click)="previousState()">
+                  <span>Cancel</span>
+                </button>
+
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

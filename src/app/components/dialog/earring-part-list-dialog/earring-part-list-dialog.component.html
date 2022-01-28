@@ -1,0 +1,66 @@
+<div *ngIf="earringParts">
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <h4 class="modal-title">Add new parts</h4>
+    <button mat-icon-button (click)="cancel()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header card-header-danger">
+                <div class="form-group row">
+                  <div class="col-md-6">
+                    <h4 class="card-category">All components for earrings</h4>
+                  </div>
+                </div>
+
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"></th>
+                    </thead>
+                    <tbody *ngIf="earringParts">
+                    <tr *ngFor="let earringPart of earringParts; index as i">
+                      <th scope="row">{{ i + 1 }}</th>
+                      <td>
+                        <img src="{{earringPart.imageUrl}}" class="img-fluid img-thumbnail h-auto" width="150">
+                      </td>
+                      <td>{{earringPart.name}}</td>
+                      <td>{{earringPart.price |currency :'EUR'}}</td>
+                      <td class="td-actions text-right">
+                        <!-- Call to action buttons -->
+                        <button mat-icon-button
+                                color="accent"
+                                matTooltip="Add"
+                                (click)="addTempEarringPart(earringPart)">
+                          <mat-icon>add</mat-icon>
+                        </button>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  </div>
+</div>
+
+

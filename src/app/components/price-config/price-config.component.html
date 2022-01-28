@@ -1,0 +1,43 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h3 class="card-title">Price configuration</h3>
+            <p>setting the price for calculating the price of earrings</p>
+          </div>
+          <div class="card-body">
+            <form name="priceConfigForm" [formGroup]="priceConfigForm" role="form" (ngSubmit)="save()">
+              <div *ngIf="priceConfig">
+                <div class="form-group" [hidden]="true">
+                  <label>ID</label>
+                  <input type="text" class="form-control" name="id" formControlName="id" readonly/>
+                </div>
+                <div class="form-group">
+                  <label>Premium Rate (%)</label>
+                  <input type="text" class="form-control" name="premiumRate" formControlName="premiumRate"/>
+                  <mat-error *ngIf="priceConfigForm.get('premiumRate')?.errors">Only numbers</mat-error>
+                </div>
+                <div class="form-group">
+                  <label>Delivery price (EUR)</label>
+                  <input type="text" class="form-control" name="deliveryPrice" formControlName="deliveryPrice"/>
+                  <mat-error *ngIf="priceConfigForm.get('deliveryPrice')?.errors">Only numbers and '.'</mat-error>
+                </div>
+              </div>
+              <div *ngIf="priceConfig">
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                        [disabled]="priceConfigForm.invalid || isSaving">Save
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

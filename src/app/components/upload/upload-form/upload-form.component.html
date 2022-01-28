@@ -1,0 +1,42 @@
+<form name="editForm" [formGroup]="uploadForm" role="form" novalidate>
+  <div class="row">
+    <div class="col-md-9">
+      <mat-form-field appearance="outline">
+        <ngx-mat-file-input color="primary" formControlName="selectFile">
+          <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+        </ngx-mat-file-input>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3 mt-3">
+      <button mat-raised-button color="primary" (click)="upload()" class="text-md-right"
+              [disabled]="!uploadForm.get(['selectFile'])!.value">
+        <mat-icon>upload</mat-icon>
+        <span>Upload</span>
+      </button>
+    </div>
+  </div>
+
+
+</form>
+
+
+<div *ngIf="currentFileUpload" class="progress mt-2 mb-2">
+  <div
+    class="progress-bar progress-bar-info"
+    role="progressbar"
+    attr.aria-valuenow="{{ percentage }}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [ngStyle]="{ width: percentage + '%' }"
+  >
+    {{ percentage }}%
+
+  </div>
+
+</div>
+
+
+
+
+
+

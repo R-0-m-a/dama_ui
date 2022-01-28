@@ -1,0 +1,38 @@
+<div *ngIf="hasTempEarringPart()" class="form-group">
+  <div class="table-responsive">
+    <table class="table">
+      <thead class=" text-primary">
+      <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Material</th>
+      <th scope="col">Color</th>
+      <th scope="col">Price</th>
+      <th scope="col"></th>
+      </thead>
+      <tbody *ngIf="earringParts">
+      <tr *ngFor="let earringPart of earringParts; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          <img src="{{earringPart.imageUrl}}" class="img-fluid img-thumbnail h-auto" width="150">
+        </td>
+        <td>{{earringPart.name}}</td>
+        <td>{{earringPart.description}}</td>
+        <td>{{earringPart.material}}</td>
+        <td>{{earringPart.color}}</td>
+        <td>{{earringPart.price |currency :'EUR'}}</td>
+        <td class="td-actions text-right">
+          <!-- Call to action buttons -->
+          <button mat-icon-button
+                  color="accent"
+                  matTooltip="Delete"
+                  (click)="deleteTempEarringPart(earringPart)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

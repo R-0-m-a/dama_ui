@@ -1,0 +1,63 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h3 class="card-title text-center" id="myEarringPartLabel">Create Earring</h3>
+          </div>
+          <div class="card-body">
+            <form name="editForm" [formGroup]="editForm" role="form">
+              <div *ngIf="earring">
+                <div class="form-group" [hidden]="!earring.id">
+                  <label>ID</label>
+                  <input type="text" class="form-control" name="id" formControlName="id" readonly/>
+                </div>
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" name="name" formControlName="name"/>
+                  <mat-error *ngIf="editForm.get('name')?.errors">Name is required</mat-error>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" name="description" formControlName="description"/>
+                </div>
+                <div class="form-group">
+                  <label>Image</label>
+
+                  <app-upload-form (fileUploadUrl)="getImageUrl($event)"></app-upload-form>
+
+                  <input type="text" class="form-control" name="imageUrl" formControlName="imageUrl" hidden readonly>
+                  <div *ngIf="earring.imageUrl" class="text-center mt-2">
+                    <img mat-card-  image [src]="earring.imageUrl" class="rounded w-25">
+                  </div>
+                </div>
+                <app-earring-temporary-part [earringParts]="getTempEarringPart()"></app-earring-temporary-part>
+
+              </div>
+
+              <div *ngIf="earring">
+
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                        [disabled]="editForm.invalid || isSaving" (click)="save()">
+                  <span>Save</span>
+                </button>
+                <button mat-raised-button class="btn pull-right mr-2" (click)="cancel()">
+                  <span>Cancel</span>
+                </button>
+
+              </div>
+
+            </form>
+            <button mat-raised-button class="btn btn-success pull-right mr-2" (click)="addTempEarringPart()">
+              <span>Add new parts</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

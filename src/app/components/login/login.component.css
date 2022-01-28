@@ -1,0 +1,21 @@
+.bg {
+
+  /* Full height */
+  height: 100%;
+  background: rgba(255,245,215,.5);
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  opacity: .5;
+}
+
+.loginContent {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

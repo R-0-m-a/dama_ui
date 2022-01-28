@@ -1,0 +1,26 @@
+<!-- Modal Header -->
+<div *ngIf="crystal">
+  <div class="modal-header">
+    <h4 class="modal-title"><strong>{{crystal.name}}</strong></h4>
+    <button mat-icon-button (click)="cancel()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col-4">
+        <img src="{{crystal.image}}" class="img-fluid img-thumbnail h-auto" width="150">
+      </div>
+      <div class="col-8">
+        <h5 class="card-category text-gray">{{crystal.price|currency :'EUR'}}</h5>
+        <a href="{{crystal.url}}">more details ... </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  </div>
+</div>

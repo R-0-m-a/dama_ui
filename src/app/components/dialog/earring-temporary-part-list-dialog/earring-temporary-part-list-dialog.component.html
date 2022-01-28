@@ -1,0 +1,22 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h4 class="modal-title">The parts fur new earring</h4>
+  <button mat-icon-button (click)="cancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="main-content">
+    <div class="container-fluid">
+      <app-earring-temporary-part [earringParts]="getTempEarringPart()"></app-earring-temporary-part>
+      <div *ngIf="getTempEarringPart().length == 0">
+        <p class="text-warning">No part selected</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+</div>
+
+

@@ -1,0 +1,68 @@
+<div class="bg" style="background-image: url({{background}})"></div>
+<div class="loginContent main-content">
+  <div class="container-fluid">
+    <div class="row pt-5">
+      <div class="col-md-5 mx-auto p-5">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <div class="form-group row">
+              <div class="col-md-6">
+                <h3 class="card-title ">Sign in</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger" *ngIf="authenticationError" data-cy="loginError">
+              <strong>Failed to sign in!</strong> Please check your credentials and try again.
+            </div>
+            <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
+              <div class="form-group">
+                <label class="username-label" for="username">Login</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="username"
+                  id="username"
+                  placeholder="Your username"
+                  formControlName="username"
+                  #username
+                  data-cy="username"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="password"
+                  id="password"
+                  placeholder="Your password"
+                  formControlName="password"
+                  data-cy="password"
+                />
+              </div>
+
+              <div class="form-check pb-3">
+                <label class="form-check-label" for="rememberMe">
+                  <input class="form-check-input" type="checkbox" value="" name="rememberMe" id="rememberMe"
+                         formControlName="rememberMe">
+
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                   </span>
+                  Remember me
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block mb-3" data-cy="submit">Sign in</button>
+            </form>
+            <div class="alert alert-warning" >
+              <span>You don't have an account yet?</span>
+              <a class="alert-link" routerLink="/register">Register a new account</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card card-profile">
+          <div class="card-avatar">
+              <img class="img" [src]="earring.imageUrl" (click)="utilities.zoomImg(earring.imageUrl)">
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">{{earring.name}}</h4>
+            <p class="card-description">
+              {{earring.description}}
+            </p>
+            <h5 class="card-category text-gray">{{earring.totalPrice|currency :'EUR'}}</h5>
+            <a (click)="previousState()" class="btn btn-danger btn-round">Back</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Components</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Material</th>
+                <th scope="col">Color</th>
+                <th *appHasAnyAuthority="'ROLE_ADMIN'" scope="col">Price</th>
+                </thead>
+                <tbody *ngIf="earring.earringDetails">
+                <tr *ngFor="let earringPart of earring.earringDetails; index as i">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>
+                    <img src="{{earringPart.imageUrl}}" class="img-fluid img-thumbnail h-auto" width="150" (click)="utilities.zoomImg(earringPart.imageUrl)">
+                  </td>
+                  <td>{{earringPart.name}}</td>
+                  <td>{{earringPart.description}}</td>
+                  <td>{{earringPart.material}}</td>
+                  <td>{{earringPart.color}}</td>
+                  <td *appHasAnyAuthority="'ROLE_ADMIN'">{{earringPart.price |currency :'EUR'}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

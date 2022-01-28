@@ -1,0 +1,46 @@
+<div class="logo">
+  <a href="/" class="simple-text">
+    <div class="logo-img">
+      <img [src]="logoUrl"/>
+    </div>
+    Dama
+  </a>
+</div>
+<div class="sidebar-wrapper">
+
+  <div *ngIf="isMobileMenu()">
+    <ul class="nav navbar-nav nav-mobile-menu">
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="material-icons">person</i>
+          <p>
+            <span class="d-lg-none d-md-block">Account</span>
+          </p>
+        </a>
+      </li>
+      <li *ngIf="utilities.getCountTempEarringPart()>0" class="nav-item">
+        <a class="nav-link" (click)="utilities.showTempParts()">
+          <i class="material-icons">shopping_basket</i>
+          <p>
+            <span class="d-lg-none d-md-block">Parts</span>
+          </p>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <ul class="nav">
+    <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+      <div *ngIf="menuItem.role">
+        <a *appHasAnyAuthority="menuItem.role" class="nav-link" [routerLink]="[menuItem.path]">
+          <i class="material-icons">{{menuItem.icon}}</i>
+          <p>{{menuItem.title}}</p>
+        </a>
+      </div>
+      <a *ngIf="!menuItem.role" class="nav-link" [routerLink]="[menuItem.path]">
+        <i class="material-icons">{{menuItem.icon}}</i>
+        <p>{{menuItem.title}}</p>
+      </a>
+    </li>
+  </ul>
+</div>
